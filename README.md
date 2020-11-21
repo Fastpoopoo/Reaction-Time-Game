@@ -1,4 +1,3 @@
-
 > Open this page at [https://fastpoopoo.github.io/Reaction-Time-Game/](https://fastpoopoo.github.io/Reaction-Time-Game/)
 
 ## Use as Extension
