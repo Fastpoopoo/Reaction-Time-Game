@@ -5,7 +5,7 @@
 This repository can be added as an **extension** in MakeCode.
 
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
+* Create a **New Project**
 * click on **Extensions** under the gearwheel menu
 * search for **https://github.com/fastpoopoo/reaction-time-game** and import
 
@@ -17,12 +17,19 @@ To edit this repository in MakeCode.
 * click on **Import** then click on **Import URL**
 * paste **https://github.com/fastpoopoo/reaction-time-game** and click import
 
-## Blocks preview
+## Using the Reaction Time Game
 
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
+This extension is used to create a reaction time Game. 
+To use this extension just use the code below:"
 
-![A rendered view of the blocks](https://github.com/fastpoopoo/reaction-time-game/raw/master/.github/makecode/blocks.png)
+<pre>
+    <code class="language-blocks">
+        reactionGame.setup(TouchPin.P0, Button.B);
+
+        reactionGame.start();
+    </code>
+</pre>
+
 
 #### Metadata (used for search, rendering)
 
