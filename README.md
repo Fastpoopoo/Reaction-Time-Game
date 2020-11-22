@@ -19,8 +19,8 @@ To edit this repository in MakeCode.
 
 ## Using the Reaction Time Game
 
-This extension is used to create a reaction time Game. 
-To use this extension just use the code below:"
+This extension is used to create a reaction time game. 
+To use this extension just use the code below:
 
 <pre>
     <code class="language-blocks">
