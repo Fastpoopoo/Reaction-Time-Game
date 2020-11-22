@@ -1,3 +1,6 @@
+/**
+ * Collection of UI functions
+ */
 //% color=190 weight=115 icon="\uf108" block="UI"
 namespace UI {
     //% block
