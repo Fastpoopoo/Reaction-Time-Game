@@ -133,9 +133,11 @@ namespace reactionGame {
         }
 
         private win(winner: number): void {
-            this.winnerNum = winner;   // Keep track of who won
-            basic.clearScreen();       // Clear the screen
-            this.showScore();          // Call the function to show the score
+            if (this.winnerNum == 0) {     // Make sure Nobody has won
+                this.winnerNum = winner;   // Keep track of who won
+                basic.clearScreen();       // Clear the screen
+                this.showScore();          // Call the function to show the score
+            }
         }
 
         public showScore(): void {
