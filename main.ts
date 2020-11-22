@@ -1,7 +1,7 @@
 /**
  * Collection of UI functions
  */
-//% color=190 weight=115 icon="\uf108" block="UI"
+//% color="#5b99a5" weight=115 icon="\uf108" block="UI"
 namespace UI {
     //% block
     export function countdown (length: number = 3): void { // Do a countdown for length seconds, the default is three
@@ -38,7 +38,7 @@ namespace Timing {
 /**
  * The Main Game Class
  */
-//% color=190 weight=114 icon="\uf11b" block="Reaction Game"
+//% color="#5b99a5" weight=114 icon="\uf11b" block="Reaction Game"
 namespace reactionGame {
     let ReactionGame: _NewReactionGame;
     /**
