@@ -1,4 +1,4 @@
-> Open this page at [https://fastpoopoo.github.io/Reaction-Time-Game/](https://fastpoopoo.github.io/Reaction-Time-Game/)
+> Open this page at [https://fastpoopoo.github.io/reaction-time-game/](https://fastpoopoo.github.io/reaction-time-game/)
 
 ## Use as Extension
 
