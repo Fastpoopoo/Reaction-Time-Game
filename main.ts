@@ -1,5 +1,7 @@
-class UI {
-    static countdown (length: number = 3) { // Do a countdown for length seconds, the default is three
+//% color=190 weight=115 icon="\uf108" block="UI"
+namespace UI {
+    //% block
+    export function countdown (length: number = 3): void { // Do a countdown for length seconds, the default is three
         for (let i = length; i > 0; i--) { 
             basic.showNumber(i);  
             basic.pause(1000);
@@ -7,31 +9,36 @@ class UI {
         basic.clearScreen();
     }
 }
-class Timer {
-    private startTime: number;
-    private stopTime: number;
-    private hasStopped: boolean;
-    toSeconds(): number {
-        return (this.stopTime - this.startTime) / 1000;
-    }
-    start() {
-        this.hasStopped = false;
-        this.startTime = control.millis();
-    }
-    stop() {
-        this.hasStopped = true;
-        this.stopTime = control.millis();
-    }
+namespace Timing {
+    /**
+    * A Simple Timer Class
+    */
+    export class timer {
+        private startTime: number;
+        private stopTime: number;
+        private hasStopped: boolean;
+        toSeconds(): number {
+            return (this.stopTime - this.startTime) / 1000;
+        }
+        start(): void {
+            this.hasStopped = false;
+            this.startTime = control.millis();
+        }
+        stop(): void {
+            this.hasStopped = true;
+            this.stopTime = control.millis();
+        }
+    }
 }
 class ReactionGame {
-    private startButton: Button;             // Define the Button to start the game
-    private player1Pin: TouchPin;            // Define the Button the first player has to hit
-    private player2Pin: Button;              // Define the Button the second player has to hit
-    private player1Light: AnalogPin;         // Define the Light for the first player
-    private player2Light: AnalogPin;         // Define the Light for the second player
-    private winnerNum: number = 0;           // Make sure we keep track of who won
-    private hasStarted: boolean = false;     // Make sure that it does not run more than once at a time
-    private timer: Timer = new Timer();      // Create a timer object
+    private startButton: Button;                           // Define the Button to start the game
+    private player1Pin: TouchPin;                          // Define the Button the first player has to hit
+    private player2Pin: Button;                            // Define the Button the second player has to hit
+    private player1Light: AnalogPin;                       // Define the Light for the first player
+    private player2Light: AnalogPin;                       // Define the Light for the second player
+    private winnerNum: number = 0;                         // Make sure we keep track of who won
+    private hasStarted: boolean = false;                   // Make sure that it does not run more than once at a time
+    private timer: Timing.timer = new Timing.timer();      // Create a timer object
 
     constructor (player1Pin: TouchPin, player2Pin: Button, startButton: Button = Button.A, player1Light: AnalogPin, player2Light: AnalogPin) {
         this.startButton = startButton;  // Assign the Variables to the class so it
