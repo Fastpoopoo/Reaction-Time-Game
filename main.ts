@@ -28,8 +28,10 @@ namespace Timing {
             this.startTime = control.millis();
         }
         stop(): void {
-            this.hasStopped = true;
-            this.stopTime = control.millis();
+            if (!this.hasStopped) {
+                this.hasStopped = true;
+                this.stopTime = control.millis();
+            }
         }
     }
 }
@@ -42,15 +44,16 @@ namespace reactionGame {
     /**
      * Setup the Game Controls
      */
-    //% block="Set Game Controls: First Player Pin: %player1PinSecond Player Button %player2Pin||Start Button: %startButtonFirst Player Light: %player1LightSecond Player Light: %player2Light" weight=150
+    //% block="Set Game Controls: First Player Pin: %player1PinSecond Player Button %player2Pin||Start Button: %startButtonFirst Player Light: %player1LightSecond Player Light: %player2LightShould Restart When Finished: %shouldRestart" weight=150
     //% expandableArgumentMode="enabled"
     //% player1Pin.defl=TouchPin.P0
     //% player2Pin.defl=Button.B
     //% startButton.defl=Button.A
     //% player1Light.defl=AnalogPin.P1
     //% player2Light.defl=AnalogPin.P2
-    export function setup(player1Pin: TouchPin, player2Pin: Button, startButton: Button = Button.A, player1Light: AnalogPin = AnalogPin.P1, player2Light: AnalogPin = AnalogPin.P2): void {
-        ReactionGame = new _NewReactionGame(player1Pin, player2Pin, startButton, player1Light, player2Light);
+    //% shouldRestart.defl=true
+    export function setup(player1Pin: TouchPin, player2Pin: Button, startButton: Button = Button.A, player1Light: AnalogPin = AnalogPin.P1, player2Light: AnalogPin = AnalogPin.P2, shouldRestart: boolean = true): void {
+        ReactionGame = new _NewReactionGame(player1Pin, player2Pin, startButton, player1Light, player2Light, shouldRestart);
     }
     //% block="Start The Game" weight=100
     /**
@@ -59,22 +62,28 @@ namespace reactionGame {
     export function start(): void {
         ReactionGame.init();
     }
+    //% block="Show the Score" weight=90 advanced=true
+    export function showScore(): void {
+        ReactionGame.showScore();
+    }
     class _NewReactionGame {
         private startButton: Button;                           // Define the Button to start the game
         private player1Pin: TouchPin;                          // Define the Button the first player has to hit
         private player2Pin: Button;                            // Define the Button the second player has to hit
         private player1Light: AnalogPin;                       // Define the Light for the first player
         private player2Light: AnalogPin;                       // Define the Light for the second player
+        private shouldRestart: boolean;                        // Whether the game should restart after it finishes
         private winnerNum: number = 0;                         // Make sure we keep track of who won
         private hasStarted: boolean = false;                   // Make sure that it does not run more than once at a time
         private timer: Timing.timer = new Timing.timer();      // Create a timer object
 
-        constructor (player1Pin: TouchPin, player2Pin: Button, startButton: Button = Button.A, player1Light: AnalogPin, player2Light: AnalogPin) {
+        constructor (player1Pin: TouchPin, player2Pin: Button, startButton: Button = Button.A, player1Light: AnalogPin, player2Light: AnalogPin, shouldRestart: boolean) {
             this.startButton = startButton;  // Assign the Variables to the class so it
             this.player1Pin = player1Pin;    // can access them later
             this.player2Pin = player2Pin;
             this.player1Light = player1Light;
             this.player2Light = player2Light;
+            this.shouldRestart = shouldRestart;
         }
 
         public init(): void {
@@ -129,11 +138,11 @@ namespace reactionGame {
             this.showScore();          // Call the function to show the score
         }
 
-        private showScore(): void {
+        public showScore(): void {
             if (this.winnerNum == 1) {
                 pins.analogWritePin(this.player1Light, 512);     // Make the winners light turn on
                 pins.analogSetPeriod(this.player1Light, 250000); // Make it flash
-            } else {
+            } else if (this.winnerNum == 2) {
                 pins.analogWritePin(this.player2Light, 512);     // Make the winners light turn on
                 pins.analogSetPeriod(this.player2Light, 250000); // Make it flash
             }
@@ -144,7 +153,9 @@ namespace reactionGame {
                 basic.pause(500);                              // Wait a bit
             }
 
-            this.init(); // Restart the Cycle
+            if (this.shouldRestart) {
+                this.init(); // Restart the Cycle
+            }
         }
     }
 }
