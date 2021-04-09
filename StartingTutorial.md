@@ -1,5 +1,5 @@
 ```package
-reaction-time-game=github:Fastpoopoo/reaction-time-game
+reaction-time-game=github:UserJHansen/reaction-time-game
 
 # How to Start with Micro:Bit Reaction Game
 
